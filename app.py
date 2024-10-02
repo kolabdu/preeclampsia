@@ -1,17 +1,17 @@
 import streamlit as st
-import pickle
+import joblib
 
 
 
 
 
-with open('rf_model.pkl','rb') as file:
-    mod = pickle.load(file)
+with open('rf_model.joblib','rb') as file:
+    model = joblib.load(file)
 
 st.title('Preeclampsia Risk Level Checker')
-def pred(age, sys,dia, bs, temp, heart):
-    pre = mod.predict([[age, sys,dia, bs, temp, heart]])
-    return pre
+def predict(age, sys,dia, bs, temp, heart):
+    prediction = model.predict([[age, sys,dia, bs, temp, heart]])
+    return prediction
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
     risk = ''
 
     if st.button('Check Risk Level'):
-        result = pred(age, sys, dia, bs, temp, heart)
+        result = predict(age, sys, dia, bs, temp, heart)
         for i in range(len(result)):
 
             if result[i] ==0:
