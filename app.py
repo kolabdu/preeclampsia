@@ -1,12 +1,12 @@
 import streamlit as st
-import dill
+import pickle
 
 
 
 
 
 with open('rf_model.pkl','rb') as file:
-    mod = dill.load(file)
+    mod = pickle.load(file)
 
 st.title('Preeclampsia Risk Level Checker')
 def pred(age, sys,dia, bs, temp, heart):
